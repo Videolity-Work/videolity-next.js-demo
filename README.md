@@ -9,7 +9,7 @@ Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin:
 1. **Repos'u Kopyalayın**
 
     ```bash
-    git clone https://github.com/mhmmdglc/videolity-next.js-demo.git
+    git clone https://github.com/Videolity-Work/videolity-js-demo.git
     ```
 
 2. **Bağımlılıkları Yükleyin**
