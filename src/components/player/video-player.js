@@ -5,14 +5,19 @@ const VIDEO_URL="https://preview.dunh29xielhio.amplifyapp.com/video-player?id=Ji
 export default function VideoPlayer() {
     const ref = useRef(null);
     const [width, setWidth] = useState(0);
+    
+    // Video oranını video URL'indeki viewRatio değerinden okuyabilirsiniz 
+    // ya da statik olarak buraya yazabilirsiniz
     const aspectRatio = 1920 / 950;
 
+    // Ekran boyutu değiştiğinde video boyutunu güncelle
     const handleResize = () => {
         const iframe = document.querySelector('iframe');
         const width = iframe.offsetWidth;
         iframe.style.height = `${width / aspectRatio}px`;
     };
 
+    // İlk render'da ve boyut değiştiğinde genişliği güncelle
     useEffect(() => {
         const resize = () => {
           setWidth(ref.current ? ref.current.offsetWidth : 0);
@@ -22,6 +27,7 @@ export default function VideoPlayer() {
         return () => window.removeEventListener('resize', resize);
       }, []);
       
+      // Genişlik değiştiğinde video boyutunu güncelle
       useEffect(() => {
         handleResize();
       }, [width]);
