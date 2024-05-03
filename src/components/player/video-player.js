@@ -1,13 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 
-function VideoPlayer() {
-    const [aspectRatio, setAspectRatio] = useState(16 / 8);
+const VIDEO_URL="https://preview.dunh29xielhio.amplifyapp.com/video-player?id=JimmyKey&viewRatio=90"
 
-    const handleMessage = (event) => {
-        if (event.data && event.data.for === 'videolityIframeResize') {
-            setAspectRatio(event.data.aspectRatio);
-        }
-    };
+export default function VideoPlayer() {
+    const ref = useRef(null);
+    const [width, setWidth] = useState(0);
+    const aspectRatio = 1920 / 950;
 
     const handleResize = () => {
         const iframe = document.querySelector('iframe');
@@ -16,24 +14,23 @@ function VideoPlayer() {
     };
 
     useEffect(() => {
-        window.addEventListener('message', handleMessage, false);
-        window.addEventListener('resize', handleResize);
-
-        handleResize();
-
-        return () => {
-            window.removeEventListener('message', handleMessage, false);
-            window.removeEventListener('resize', handleResize);
+        const resize = () => {
+          setWidth(ref.current ? ref.current.offsetWidth : 0);
         };
-    }, [aspectRatio]);
+        resize();
+        window.addEventListener('resize', resize);
+        return () => window.removeEventListener('resize', resize);
+      }, []);
+      
+      useEffect(() => {
+        handleResize();
+      }, [width]);
 
     return (
         <div style={{width: "100%"}}>
-            <iframe style={{width: "100%", height: "100%"}} src="https://preview.dunh29xielhio.amplifyapp.com/video-player?id=JimmyKey"
+            <iframe ref={ref} style={{width: "100%", height: "100%"}} src={VIDEO_URL}
                     frameBorder="0"
                     scrolling="no"></iframe>
         </div>
     );
 }
-
-export default VideoPlayer;
