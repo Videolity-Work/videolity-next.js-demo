@@ -5,19 +5,19 @@ const VIDEO_URL="https://preview.dunh29xielhio.amplifyapp.com/video-player?id=Ji
 export default function VideoPlayer() {
     const ref = useRef(null);
     const [width, setWidth] = useState(0);
-    
-    // Video oranını video URL'indeki viewRatio değerinden okuyabilirsiniz 
-    // ya da statik olarak buraya yazabilirsiniz
+
+    // You can read the aspect ratio of the video from the viewRatio value in the video URL
+    // or you can statically write it here
     const aspectRatio = 1920 / 950;
 
-    // Ekran boyutu değiştiğinde video boyutunu güncelle
+    // Update the video size when the screen size changes
     const handleResize = () => {
         const iframe = document.querySelector('iframe');
         const width = iframe.offsetWidth;
         iframe.style.height = `${width / aspectRatio}px`;
     };
 
-    // İlk render'da ve boyut değiştiğinde genişliği güncelle
+    // Update the width on the initial render and when the size changes
     useEffect(() => {
         const resize = () => {
           setWidth(ref.current ? ref.current.offsetWidth : 0);
@@ -27,7 +27,7 @@ export default function VideoPlayer() {
         return () => window.removeEventListener('resize', resize);
       }, []);
       
-      // Genişlik değiştiğinde video boyutunu güncelle
+      // Update the video size when the width changes
       useEffect(() => {
         handleResize();
       }, [width]);
