@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 
-const VIDEO_URL="https://preview.dunh29xielhio.amplifyapp.com/video-player?id=JimmyKey&viewRatio=90"
+const VIDEO_URL="https://staging.vdlty.co/video-player?id=30ca1a03-c339-4ce7-85c1-920155b69dc4&viewRatio=1920:950"
 
 export default function VideoPlayer() {
     const ref = useRef(null);
