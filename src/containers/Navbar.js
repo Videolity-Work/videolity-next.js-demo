@@ -7,10 +7,7 @@ import MoonIcon from "@heroicons/react/24/outline/MoonIcon";
 import SunIcon from "@heroicons/react/24/outline/SunIcon";
 
 function Navbar() {
-  // const [currentTheme, setCurrentTheme] = useState(localStorage.getItem("theme"))
   const [currentTheme, setCurrentTheme] = useState(null);
-
-  const logoutUser = () => {};
 
   useEffect(() => {
     themeChange(false);
@@ -25,7 +22,6 @@ function Navbar() {
         setCurrentTheme("light");
       }
     }
-    // 👆 false parameter is required for react project
   }, []);
 
   return (
